@@ -1,31 +1,29 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import PropTypes from "prop-types";
 import { RandomNumber } from './RandomNumber';
 
-
-export class Game extends React.Component{
+export class Game extends React.Component {
   static propTypes = {
     randomNumberCount: PropTypes.number.isRequired
   };
 
-
   randomNumbers = Array.from({ length: this.props.randomNumberCount }).map(() => 1 + Math.floor(10 * Math.random()));
   target = this.randomNumbers.slice(0, this.props.randomNumberCount - 2).reduce((a, b) => a + b, 0);
 
-    render () {
-        return (
-            <View style={styles.container} >
-                <Text style={styles.target}>{this.target}</Text> 
-                <View style={styles.randomContainer}>
-                {this.randomNumbers.map((randomNumber, index) => 
-                  <RandomNumber key={index} number={randomNumber}/>
-                )}
-                </View>            
-            </View>
-          );
-    }
-  
+  render() {
+    return (
+      <View style={styles.container} >
+        <Text style={styles.target}>{this.target}</Text>
+        <View style={styles.randomContainer}>
+          {this.randomNumbers.map((randomNumber, index) =>
+            <RandomNumber keyVal={index} number={randomNumber} />
+          )}
+        </View>
+      </View>
+    );
+  }
+
 }
 
 const styles = StyleSheet.create({
@@ -45,9 +43,9 @@ const styles = StyleSheet.create({
     width: 100,
     marginHorizontal: 15,
     marginVertical: 25,
-    textAlign: 'center',  
+    textAlign: 'center',
     backgroundColor: '#aaa',
-    
+
   },
   randomContainer: {
     flexDirection: "row",
